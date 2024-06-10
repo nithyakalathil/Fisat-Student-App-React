@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const Addstudent = () => {
 
@@ -7,14 +8,14 @@ const Addstudent = () => {
 
       {
 
-        "name":"",
-        "last":"",
-        "col":"",
+        "firstname":"",
+        "lastname":"",
+        "college":"",
         "dob":"",
-        "cour":"",
-        "mob":"",
+        "course":"",
+        "mobile":"",
         "email":"",
-        "addr":"",
+        "address":"",
         
 
       }
@@ -28,6 +29,21 @@ const inputHandler=(event)=>{
 
 const readValue=()=>{
     console.log(data)
+    axios.post("https://courseapplogix.onrender.com/addstudents",data).then(
+        (response)=>{
+            console.log(response.data)
+            if (response.data.status=="success") 
+                {
+                    alert("successfully added")
+                
+            } else {
+                alert("error")
+                
+            }
+        }
+    ).catch(
+        (error)=>(alert(error.message))
+    )
 }
 
   return (
@@ -41,18 +57,18 @@ const readValue=()=>{
     <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
 
 <label htmlFor="" className="form label">First Name</label>
-<input type="text" className="form-control" name='name' value={data.name} onChange={inputHandler}/>
+<input type="text" className="form-control" name='firstname' value={data.firstname} onChange={inputHandler}/>
 
     </div>
     <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
 
     <label htmlFor="" className="form label">Last Name</label>
-    <input type="text" className="form-control" name='last' value={data.last} onChange={inputHandler}/>
+    <input type="text" className="form-control" name='lastname' value={data.lastname} onChange={inputHandler}/>
 
     </div>
     <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
     <label htmlFor="" className="form label">College</label>
-    <input type="text" className="form-control" name='col' value={data.col} onChange={inputHandler}/>
+    <input type="text" className="form-control" name='college' value={data.college} onChange={inputHandler}/>
 
     </div>
     <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
@@ -63,7 +79,7 @@ const readValue=()=>{
     </div>
     <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
     <label htmlFor="" className="form label">Cource</label>
-    <select name="cour" id="" className="form-control" value={data.cour} onChange={inputHandler}>
+    <select name="course" id="" className="form-control" value={data.course} onChange={inputHandler}>
         <option value="Mca">Mca</option>
         <option value="Mba">Mba</option>
         <option value="Mtech">Mtech</option>
@@ -74,7 +90,7 @@ const readValue=()=>{
     <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
 
     <label htmlFor="" className="form label">Mobile No</label>
-    <input type="text" className="form-control" name='mob' value={data.mob} onChange={inputHandler}/>
+    <input type="text" className="form-control" name='mobile' value={data.mobile} onChange={inputHandler}/>
 
     </div>
     <div className="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
@@ -86,7 +102,7 @@ const readValue=()=>{
     <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
 
     <label htmlFor="" className="form label">Address</label>
-    <textarea name="addr" id="" className="form-control" value={data.addr} onChange={inputHandler}></textarea>
+    <textarea name="address" id="" className="form-control" value={data.address} onChange={inputHandler}></textarea>
 
     </div>
     <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
